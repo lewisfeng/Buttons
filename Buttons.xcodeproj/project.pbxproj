@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC3A9AF12B2996AE00845717 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3A9AF02B2996AE00845717 /* DetailsView.swift */; };
+		AC3A9AF32B29992500845717 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3A9AF22B29992500845717 /* Helper.swift */; };
 		AC4F78E92B26DFF300A81B44 /* ButtonsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4F78E82B26DFF300A81B44 /* ButtonsApp.swift */; };
 		AC4F78EB2B26DFF300A81B44 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4F78EA2B26DFF300A81B44 /* ContentView.swift */; };
 		AC4F78ED2B26DFF500A81B44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC4F78EC2B26DFF500A81B44 /* Assets.xcassets */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC3A9AF02B2996AE00845717 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		AC3A9AF22B29992500845717 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		AC4F78E52B26DFF300A81B44 /* Buttons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Buttons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC4F78E82B26DFF300A81B44 /* ButtonsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsApp.swift; sourceTree = "<group>"; };
 		AC4F78EA2B26DFF300A81B44 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -95,7 +99,9 @@
 			isa = PBXGroup;
 			children = (
 				AC4F78E82B26DFF300A81B44 /* ButtonsApp.swift */,
+				AC3A9AF22B29992500845717 /* Helper.swift */,
 				AC4F78EA2B26DFF300A81B44 /* ContentView.swift */,
+				AC3A9AF02B2996AE00845717 /* DetailsView.swift */,
 				AC4F78EC2B26DFF500A81B44 /* Assets.xcassets */,
 				AC4F78EE2B26DFF500A81B44 /* Preview Content */,
 			);
@@ -259,6 +265,8 @@
 			files = (
 				AC4F78EB2B26DFF300A81B44 /* ContentView.swift in Sources */,
 				AC4F78E92B26DFF300A81B44 /* ButtonsApp.swift in Sources */,
+				AC3A9AF12B2996AE00845717 /* DetailsView.swift in Sources */,
+				AC3A9AF32B29992500845717 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,7 +430,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Buttons/Preview Content\"";
-				DEVELOPMENT_TEAM = 2TA8JYDP57;
+				DEVELOPMENT_TEAM = 9VM2C437X5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -451,7 +459,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Buttons/Preview Content\"";
-				DEVELOPMENT_TEAM = 2TA8JYDP57;
+				DEVELOPMENT_TEAM = 9VM2C437X5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
