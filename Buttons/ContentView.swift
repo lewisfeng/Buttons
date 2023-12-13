@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+  // task 1
   // text that for each timer(button)
   @State var buttonAText: String = "Timer A    0%"
   @State var buttonBText: String = "Timer B    0%"
@@ -35,6 +36,9 @@ struct ContentView: View {
   @State var timerADur: Int = 60  // Timer A has a duration 60s from 0% to 100%
   @State var timerBDur: Int = 90  // Timer B has a duration 90s from 0% to 100%
   @State var timerCDur: Int = 120 // Timer C has a duration 120s from 0% to 100%
+  
+  // task 2
+  @State private var darknessLevel: Double = 0.0 // set initial darkness level, darkness = 1 - brightness?
   
   var body: some View {
     NavigationView {
@@ -71,7 +75,10 @@ struct ContentView: View {
         Spacer()
         Spacer()
         
-      }.onAppear{
+      }.brightness(darknessLevel)
+      .onAppear {
+        print("UIScreen.main.brightness: \(UIScreen.main.brightness)")
+        
         // we only want to run the timer once
         if timer == nil {
           timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { t in
@@ -81,7 +88,13 @@ struct ContentView: View {
               let timePassed = Int(Date().timeIntervalSince(d) + timerAPassedDur)
               // check the current percentage, if it's greater than or equal to 100 then just show 100
               timerAPercentage = (timePassed*100/timerADur) >= 100 ? 100 : (timePassed*100/timerADur)
-              
+
+              // task 2: When A timer greater than 20%, start matching the screen darkness level to timer A
+              if timerAPercentage > 20 {
+                // FIXME: darkness = 1 - brightness?
+                darknessLevel = 1 - (Double(timerAPercentage)/100.0 > 1 ? 1 : Double(timerAPercentage)/100.0)
+              }
+
               buttonAText = "Timer A   \(timerAPercentage)%"
             }
             
@@ -97,10 +110,12 @@ struct ContentView: View {
               timerCPercentage = (timePassed*100/timerCDur) >= 100 ? 100 : (timePassed*100/timerCDur)
               
               buttonCText = "Timer C   \(timerCPercentage)%"
+              
+              print("darknessLevel \(darknessLevel)")
             }
           })
         }
-      }
+      }.brightness(darknessLevel)
     }
   }
 }
