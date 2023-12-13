@@ -13,7 +13,7 @@ struct ContentView: View {
   
   @State private var start = false
   
-  @State private var timer: Timer!
+  @State private var timer: Timer?
 
   @State var selectedTimerStartDate: Date?
   @State var timerAStartDate: Date?
@@ -56,22 +56,25 @@ struct ContentView: View {
            .padding()
          }
        }.onAppear{
-         
-         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { t in
-           
-           if selecterTimerDur == timerADur, let d = timerAStartDate {
-             let timePassed = Int(Date().timeIntervalSince(d) + timerAPassedDur) 
-             timerAPercentage = (timePassed*100/timerADur) >= 100 ? 100 : (timePassed*100/timerADur)
+         if timer == nil {
+           print("timer started")
+           timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { t in
+             
+             if selecterTimerDur == timerADur, let d = timerAStartDate {
+               let timePassed = Int(Date().timeIntervalSince(d) + timerAPassedDur)
+               timerAPercentage = (timePassed*100/timerADur) >= 100 ? 100 : (timePassed*100/timerADur)
 
-             buttonAText = "Timer A   \(timerAPercentage)%"
-           }
-           if selecterTimerDur == timerBDur, let d = timerBStartDate {
-             let timePassed = Int(Date().timeIntervalSince(d))
-             percentage = (timePassed*100/timerBDur) >= 100 ? 100 : (timePassed*100/timerBDur)
-  
-             buttonBText = "Timer B   \(percentage)%"
-           }
-         })
+               buttonAText = "Timer A   \(timerAPercentage)%"
+             }
+             if selecterTimerDur == timerBDur, let d = timerBStartDate {
+               let timePassed = Int(Date().timeIntervalSince(d))
+               percentage = (timePassed*100/timerBDur) >= 100 ? 100 : (timePassed*100/timerBDur)
+    
+               buttonBText = "Timer B   \(percentage)%"
+             }
+           })
+         }
+
          
        }.navigationDestination(isPresented: $start) {
          if selectedTimerStartDate == timerAStartDate {
