@@ -33,8 +33,9 @@ struct ContentView: View {
   var body: some View {
     NavigationView {
       VStack {
-          // Your main content here
 
+        Spacer()
+        
         NavigationLink(destination: DetailsView(timer: $timer, timerDur: $timerADur, btnText: $buttonAText, selectedTimerStartDate: $timerAStartDate, passedDur: $timerAPassedDur, percentage: $timerAPercentage)) {
             // Button or any other view that triggers the navigation
           Text(self.buttonAText)
@@ -43,6 +44,21 @@ struct ContentView: View {
             .foregroundColor(.black)
             .padding()
         }
+        
+        NavigationLink(destination: DetailsView(timer: $timer, timerDur: $timerBDur, btnText: $buttonBText, selectedTimerStartDate: $timerBStartDate, passedDur: $timerBPassedDur, percentage: $timerBPercentage)) {
+            // Button or any other view that triggers the navigation
+          Text(self.buttonBText)
+            .frame(width: 200, height: 50, alignment: .center)
+            .border(Color.black, width: 1.5)
+            .foregroundColor(.black)
+            .padding()
+        }
+        
+        
+        Spacer()
+        Spacer()
+        Spacer()
+        
       }.onAppear{
         if timer == nil {
           print("timer started")
