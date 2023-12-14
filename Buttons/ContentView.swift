@@ -30,9 +30,9 @@ struct ContentView: View {
   @State private var timerBPassedDur: TimeInterval = 0
   @State private var timerCPassedDur: TimeInterval = 0
   
-  @State private var timerADur: Int = 60  // Timer A has a duration 60s from 0% to 100%
-  @State private var timerBDur: Int = 90  // Timer B has a duration 90s from 0% to 100%
-  @State private var timerCDur: Int = 120 // Timer C has a duration 120s from 0% to 100%
+  private let timerADur: Int = 60  // Timer A has a duration 60s from 0% to 100%
+  private let timerBDur: Int = 90  // Timer B has a duration 90s from 0% to 100%
+  private let timerCDur: Int = 120 // Timer C has a duration 120s from 0% to 100%
   
   // task 2
   @State private var darknessLevel: Double = 0.0 // set initial darkness level, darkness = 1 - brightness?
@@ -61,7 +61,7 @@ struct ContentView: View {
         Spacer()
         Spacer()
         
-      }.brightness(darknessLevel)
+      }
       .onAppear {
         // we only want to run the timer once
         if timer == nil {
@@ -74,11 +74,8 @@ struct ContentView: View {
               // check the current percentage, if it's greater than or equal to 100 then just show 100
               timerAPercentage = (timePassed*100/timerADur) >= 100 ? 100 : (timePassed*100/timerADur)
 
-              // task 2 - When A timer greater than 20%, start matching the screen darkness level to timer A
-              if timerAPercentage > 20 {
-                // FIXME: darkness = 1 - brightness?
-                darknessLevel = 1 - (Double(timerAPercentage)/100.0 > 1 ? 1 : Double(timerAPercentage)/100.0)
-              }
+              // task 2
+              updateScreenDarknessLevel(timerAPercentage: timerAPercentage)
             }
             
             // timer B
@@ -104,3 +101,11 @@ struct ContentView: View {
   }
 }
 
+// task 2 - When A timer greater than 20%, start matching the screen darkness level to timer A
+private func updateScreenDarknessLevel(timerAPercentage: Int) {
+  if timerAPercentage > 20 {
+    // FIXME: darkness = 1 - brightness?
+    let darknessLevel = 1 - (Double(timerAPercentage)/100.0 > 1 ? 1 : Double(timerAPercentage)/100.0)
+    UIScreen.main.brightness = darknessLevel
+  }
+}
