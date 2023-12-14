@@ -46,56 +46,56 @@ struct ContentView: View {
 
         // timer A
         NavigationLink(destination: DetailsView(selectedTimerStartDate: $timerAStartDate, passedDur: $timerAPassedDur, percentage: $timerAPercentage)) {
-          TimerTextView("Timer A", timerAPercentage).onReceive(timer) { _ in
-            if let d = timerAStartDate {
-              // get the total running timer for the timer
-              let totalRunningTime = Int(Date().timeIntervalSince(d) + timerAPassedDur)
-              // check the current percentage, if it's greater than or equal to 100 then just show 100
-              timerAPercentage = (totalRunningTime*100/timerADur) >= 100 ? 100 : (totalRunningTime*100/timerADur)
-
-              // task 2: screen darkness level
-              updateScreenDarknessLevel()
-              
-              cancelTimer()
-            }
-          }
+          TimerTextView("Timer A", timerAPercentage)
         }
         
         // timer B
         NavigationLink(destination: DetailsView(selectedTimerStartDate: $timerBStartDate, passedDur: $timerBPassedDur, percentage: $timerBPercentage)) {
-          TimerTextView("Timer B", timerBPercentage).onReceive(timer) { _ in
-            if let d = timerBStartDate {
-              let totalRunningTime = Int(Date().timeIntervalSince(d) + timerBPassedDur)
-              timerBPercentage = (totalRunningTime*100/timerBDur) >= 100 ? 100 : (totalRunningTime*100/timerBDur)
-
-              // task 2: system volume
-              updateSystemVolumeLevel()
-              
-              cancelTimer()
-            }
-          }
+          TimerTextView("Timer B", timerBPercentage)
         }
         
         NavigationLink(destination: DetailsView(selectedTimerStartDate: $timerCStartDate, passedDur: $timerCPassedDur, percentage: $timerCPercentage)) {
-          TimerTextView("Timer C", timerCPercentage).onReceive(timer) { _ in
-            if let d = timerCStartDate {
-              let totalRunningTime = Int(Date().timeIntervalSince(d) + timerCPassedDur)
-              timerCPercentage = (totalRunningTime*100/timerCDur) >= 100 ? 100 : (totalRunningTime*100/timerCDur)
-
-              cancelTimer()
-            }
-          }
+          TimerTextView("Timer C", timerCPercentage)
         }
         
         // added some spacers to move up the 3 timer buttons
         Spacer()
         Spacer()
         Spacer()
+        
+      }.onReceive(timer) { _ in
+        // check timer A
+        if let d = timerAStartDate {
+          // get the total running timer for the timer
+          let totalRunningTime = Int(Date().timeIntervalSince(d) + timerAPassedDur)
+          // check the current percentage, if it's greater than or equal to 100 then just show 100
+          timerAPercentage = (totalRunningTime*100/timerADur) >= 100 ? 100 : (totalRunningTime*100/timerADur)
+
+          // task 2: screen darkness level
+          updateScreenDarknessLevel()
+        }
+        
+        // check timer B
+        if let d = timerBStartDate {
+          let totalRunningTime = Int(Date().timeIntervalSince(d) + timerBPassedDur)
+          timerBPercentage = (totalRunningTime*100/timerBDur) >= 100 ? 100 : (totalRunningTime*100/timerBDur)
+
+          // task 2: system volume
+          updateSystemVolumeLevel()
+        }
+        
+        // check timer C
+        if let d = timerCStartDate {
+          let totalRunningTime = Int(Date().timeIntervalSince(d) + timerCPassedDur)
+          timerCPercentage = (totalRunningTime*100/timerCDur) >= 100 ? 100 : (totalRunningTime*100/timerCDur)
+        }
+        
+        cancelTimer()
       }
     }
   }
   
-  // onec timer ABC percentage reached 100% we need to cancel the timer
+  // once timer A,B,C percentage all reached 100% we need to cancel the timer
   private func cancelTimer() {
     if timerAPercentage == 100, timerBPercentage == 100 && timerCPercentage == 100 {
       timer.upstream.connect().cancel()
