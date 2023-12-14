@@ -9,29 +9,21 @@ import SwiftUI
 
 struct DetailsView: View {
   @Environment(\.presentationMode) var presentationMode
-
-  @Binding var selectedTimerStartDate: Date?
-  @Binding var passedDur: TimeInterval
-  @Binding var percentage: Int
+  @ObservedObject var viewModel: TimerViewModel
   
   var body: some View {
     VStack {
       Spacer()
       
       Button(action: {
-        if selectedTimerStartDate == nil {
-          selectedTimerStartDate = Date()
-        } else {
-          passedDur += Date().timeIntervalSince(selectedTimerStartDate!)
-          selectedTimerStartDate = nil
-        }
+        viewModel.check()
       }) {
         TimerTextView("Start / Pause")
       }
       
       Spacer()
       
-      Text("\(percentage)%")
+      Text("\(viewModel.percentage)%")
         .font(.system(size: 30, weight: .bold))
 
       Spacer()

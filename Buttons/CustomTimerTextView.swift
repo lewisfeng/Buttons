@@ -29,3 +29,35 @@ struct TimerTextView: View {
      .font(.system(size: 13, weight: .medium))
   }
 }
+
+class TimerViewModel: ObservableObject {
+  @Published private(set) var date: Date? // start date
+  @Published private(set) var runningTime: TimeInterval = 0 // the total running time before pause
+  // - Timer A has a duration 60s from 0% to 100%
+  // - Timer B has a duration 90s from 0% to 100%
+  // - Timer C has a duration 120s from 0% to 100%
+  @Published private(set) var duration: Int = 0
+  
+  @Published var percentage: Int = 0
+  
+  init(duration: Int) { // init with default value
+    self.duration = duration
+  }
+  
+  func check() { // when user tap Start/Pause button
+    if date == nil {
+      date = Date()
+    } else {
+      runningTime = Date().timeIntervalSince(date!)
+      date = nil
+    }
+  }
+  
+  func calculate() { // calculate percentage
+    guard let d = date else { return }
+    // get the total running timer for the timer
+    let totalRunningTime = Int(Date().timeIntervalSince(d) + runningTime)
+    // check the current percentage, if it's greater than or equal to 100 then just show 100
+    percentage = (totalRunningTime*100/duration) >= 100 ? 100 : (totalRunningTime*100/duration)
+  }
+}
