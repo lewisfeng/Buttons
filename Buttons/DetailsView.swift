@@ -26,15 +26,13 @@ struct DetailsView: View {
           selectedTimerStartDate = nil
         }
       }) {
-        Text("Start / Pause")
-          .frame(width: 200, height: 50, alignment: .center)
-          .border(Color.black, width: 1.5)
-          .foregroundColor(.black)
-          .padding(.bottom, 55)
+        TimerTextView("Start / Pause")
       }
       
+      Spacer()
+      
       Text("\(percentage)%")
-        .font(.largeTitle)
+        .font(.system(size: 30, weight: .bold))
 
       Spacer()
       Spacer()

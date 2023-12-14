@@ -11,11 +11,6 @@ import AVFoundation
 
 struct ContentView: View {
   // task 1
-  // text that for each timer(button)
-  @State private var buttonAText: String = "Timer A    0%"
-  @State private var buttonBText: String = "Timer B    0%"
-  @State private var buttonCText: String = "Timer C    0%"
-  
   // main logic
   // this is the only timer that runs as soon as app launches, it  checks every second to update UI, I have 3 date objects for timer A, B and C, once user tapps the start/pause button in details view for example timer A, I will check if the date(timerAStartDate) for timer A if its nil, if ture I will make the current date as timer A start date, if false I will re-set it to nil and save how much time timer A has been running in the past(timerAPassedDur), so if timer A gets re-started I will also add timerAPassedDur to get the total running time for timer A then use it to calculate the percentage of the timer A.
   @State private var timer: Timer?
@@ -48,29 +43,17 @@ struct ContentView: View {
       VStack {
         
         Spacer()
-        
+
         NavigationLink(destination: DetailsView(selectedTimerStartDate: $timerAStartDate, passedDur: $timerAPassedDur, percentage: $timerAPercentage)) {
-          Text(buttonAText)
-            .frame(width: 230, height: 50, alignment: .center)
-            .border(Color.black, width: 1.5)
-            .foregroundColor(.black)
-            .padding(.bottom, 5)
+          TimerTextView("Timer A", timerAPercentage)
         }
         
         NavigationLink(destination: DetailsView(selectedTimerStartDate: $timerBStartDate, passedDur: $timerBPassedDur, percentage: $timerBPercentage)) {
-          Text(buttonBText)
-            .frame(width: 230, height: 50, alignment: .center)
-            .border(Color.black, width: 1.5)
-            .foregroundColor(.black)
-            .padding(.bottom, 5)
+          TimerTextView("Timer B", timerBPercentage)
         }
         
         NavigationLink(destination: DetailsView(selectedTimerStartDate: $timerCStartDate, passedDur: $timerCPassedDur, percentage: $timerCPercentage)) {
-          Text(buttonCText)
-            .frame(width: 230, height: 50, alignment: .center)
-            .border(Color.black, width: 1.5)
-            .foregroundColor(.black)
-            .padding(.bottom, 5)
+          TimerTextView("Timer C", timerCPercentage)
         }
         
         // added some spacers to move up the 3 timer buttons
@@ -96,17 +79,13 @@ struct ContentView: View {
                 // FIXME: darkness = 1 - brightness?
                 darknessLevel = 1 - (Double(timerAPercentage)/100.0 > 1 ? 1 : Double(timerAPercentage)/100.0)
               }
-
-              buttonAText = "Timer A   \(timerAPercentage)%"
             }
             
             // timer B
             if let d = timerBStartDate {
               let timePassed = Int(Date().timeIntervalSince(d) + timerBPassedDur)
               timerBPercentage = (timePassed*100/timerBDur) >= 100 ? 100 : (timePassed*100/timerBDur)
-              
-              buttonBText = "Timer B   \(timerBPercentage)%"
-              
+
               // task 2 - Matching B timer with Volume, system volume percentage = Timer B in seconds / 90s. eg. Timer B runs from 0s to 45s, system volume percentage is from 0% to 50%.
               var volume = (Float(timerBPercentage)/100.0) * Float(50)/Float(45)
               volume = volume > 1 ? 1 : volume
@@ -117,8 +96,6 @@ struct ContentView: View {
             if let d = timerCStartDate {
               let timePassed = Int(Date().timeIntervalSince(d) + timerCPassedDur)
               timerCPercentage = (timePassed*100/timerCDur) >= 100 ? 100 : (timePassed*100/timerCDur)
-              
-              buttonCText = "Timer C   \(timerCPercentage)%"
             }
           })
         }
