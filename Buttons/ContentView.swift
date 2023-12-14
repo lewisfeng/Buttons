@@ -70,29 +70,27 @@ struct ContentView: View {
             // timer A
             if let d = timerAStartDate {
               // get the total running timer for the timer
-              let timePassed = Int(Date().timeIntervalSince(d) + timerAPassedDur)
+              let totalRunningTime = Int(Date().timeIntervalSince(d) + timerAPassedDur)
               // check the current percentage, if it's greater than or equal to 100 then just show 100
-              timerAPercentage = (timePassed*100/timerADur) >= 100 ? 100 : (timePassed*100/timerADur)
+              timerAPercentage = (totalRunningTime*100/timerADur) >= 100 ? 100 : (totalRunningTime*100/timerADur)
 
-              // task 2
+              // task 2: screen darkness level
               updateScreenDarknessLevel(timerAPercentage: timerAPercentage)
             }
             
             // timer B
             if let d = timerBStartDate {
-              let timePassed = Int(Date().timeIntervalSince(d) + timerBPassedDur)
-              timerBPercentage = (timePassed*100/timerBDur) >= 100 ? 100 : (timePassed*100/timerBDur)
+              let totalRunningTime = Int(Date().timeIntervalSince(d) + timerBPassedDur)
+              timerBPercentage = (totalRunningTime*100/timerBDur) >= 100 ? 100 : (totalRunningTime*100/timerBDur)
 
-              // task 2 - Matching B timer with Volume, system volume percentage = Timer B in seconds / 90s. eg. Timer B runs from 0s to 45s, system volume percentage is from 0% to 50%.
-              var volume = (Float(timerBPercentage)/100.0) * Float(50)/Float(45)
-              volume = volume > 1 ? 1 : volume
-              MPVolumeView.setVolume(volume)
+              // task 2: system volume
+              updateSystemVolumeLevel(timerBPercentage: timerBPercentage)
             }
             
             // timer C
             if let d = timerCStartDate {
-              let timePassed = Int(Date().timeIntervalSince(d) + timerCPassedDur)
-              timerCPercentage = (timePassed*100/timerCDur) >= 100 ? 100 : (timePassed*100/timerCDur)
+              let totalRunningTime = Int(Date().timeIntervalSince(d) + timerCPassedDur)
+              timerCPercentage = (totalRunningTime*100/timerCDur) >= 100 ? 100 : (totalRunningTime*100/timerCDur)
             }
           })
         }
@@ -101,6 +99,7 @@ struct ContentView: View {
   }
 }
 
+
 // task 2 - When A timer greater than 20%, start matching the screen darkness level to timer A
 private func updateScreenDarknessLevel(timerAPercentage: Int) {
   if timerAPercentage > 20 {
@@ -108,4 +107,11 @@ private func updateScreenDarknessLevel(timerAPercentage: Int) {
     let darknessLevel = 1 - (Double(timerAPercentage)/100.0 > 1 ? 1 : Double(timerAPercentage)/100.0)
     UIScreen.main.brightness = darknessLevel
   }
+}
+
+// task 2 - Matching B timer with Volume, system volume percentage = Timer B in seconds / 90s. eg. Timer B runs from 0s to 45s, system volume percentage is from 0% to 50%.
+private func updateSystemVolumeLevel(timerBPercentage: Int) {
+  var volume = (Float(timerBPercentage)/100.0) * Float(50)/Float(45)
+  volume = volume > 1 ? 1 : volume
+  MPVolumeView.setVolume(volume)
 }

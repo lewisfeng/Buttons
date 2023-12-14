@@ -50,7 +50,7 @@ struct DetailsView: View {
           Button(action: {
             presentationMode.wrappedValue.dismiss()
           }) {
-            Label("Back", image: "").foregroundColor(.black)
+            Text("Back").foregroundColor(.black)
           }
         }
       }
