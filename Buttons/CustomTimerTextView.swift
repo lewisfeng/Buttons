@@ -55,6 +55,8 @@ class TimerViewModel: ObservableObject {
   
   func calculate() { // calculate percentage
     guard let d = date else { return }
+    guard percentage < 100 else { return }
+    
     // get the total running timer for the timer
     let totalRunningTime = Int(Date().timeIntervalSince(d) + runningTime)
     // check the current percentage, if it's greater than or equal to 100 then just show 100

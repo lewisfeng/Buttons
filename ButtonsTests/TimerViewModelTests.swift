@@ -8,6 +8,8 @@
 import XCTest
 @testable import Buttons
 
+import MediaPlayer
+
 class TimerViewModelTests: XCTestCase {
   func testTimerAPercentage() {
     
@@ -142,8 +144,6 @@ class TimerViewModelTests: XCTestCase {
   }
   
   func testScreenDarknessLevel() {
-    let contentView = ContentView()
-    sleep(5)
     let viewModel_A = TimerViewModel(duration: 60)
     
     // When A timer greater than 20%, start matching the screen darkness level to timer A
@@ -152,18 +152,56 @@ class TimerViewModelTests: XCTestCase {
     // duration = 3s = 5%
     viewModel_A.date = Date() - 3
     viewModel_A.calculate()
-    contentView.updateScreenDarknessLevel(viewModel_A)
+    Helper.updateScreenDarknessLevel(viewModel_A.percentage)
     let screenDarknessLevel_0 = UIScreen.main.brightness
 
     // duration = 12s = 20%
-    viewModel_A.date = Date() - 50
+    viewModel_A.date = Date() - 12
     viewModel_A.calculate()
-    contentView.updateScreenDarknessLevel(viewModel_A)
+    Helper.updateScreenDarknessLevel(viewModel_A.percentage)
     let screenDarknessLevel_1 = UIScreen.main.brightness
     
-    print(screenDarknessLevel_0, screenDarknessLevel_1)
+//    print(screenDarknessLevel_0, screenDarknessLevel_1)
     
     XCTAssertEqual(screenDarknessLevel_0, screenDarknessLevel_1)
+  }
+  
+  func testSystemVolumeLevel() {
+    let contentView = ContentView()
+    
+    let viewModel_B = TimerViewModel(duration: 90)
+    // Matching B timer with Volume, system volume percentage = Timer B in seconds / 90s. eg. Timer B runs from 0s to 45s, system volume percentage is from 0% to 50%.
+    
+    // duration = 9s = 10%
+    viewModel_B.date = Date() - 9
+    viewModel_B.calculate()
+    Helper.updateSystemVolumeLevel(viewModel_B.percentage)
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      XCTAssertEqual(viewModel_B.percentage, Int(MPVolumeView.volume * 100))
+    }
+    
+    sleep(1)
+    
+    // duration = 45s = 50%
+    viewModel_B.date = Date() - 45
+    viewModel_B.calculate()
+    Helper.updateSystemVolumeLevel(viewModel_B.percentage)
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      XCTAssertEqual(viewModel_B.percentage, Int(MPVolumeView.volume * 100))
+    }
+    
+    sleep(1)
+    
+    // duration = 90s = 100%
+    viewModel_B.date = Date() - 90
+    viewModel_B.calculate()
+    Helper.updateSystemVolumeLevel(viewModel_B.percentage)
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      XCTAssertEqual(viewModel_B.percentage, Int(MPVolumeView.volume * 100))
+    }
   }
 }
 

@@ -60,6 +60,9 @@ struct ContentView: View {
     viewModel_B.calculate()
     viewModel_C.calculate()
     
+    Helper.updateScreenDarknessLevel(viewModel_A.percentage)
+    Helper.updateSystemVolumeLevel(viewModel_B.percentage)
+    
     cancelTimer()
   }
   
@@ -71,22 +74,6 @@ struct ContentView: View {
       
       timer.upstream.connect().cancel()
     }
-  }
-  
-  // task 2 - When A timer greater than 20%, start matching the screen darkness level to timer A
-  func updateScreenDarknessLevel(_ viewModel_A: TimerViewModel) {
-    if viewModel_A.percentage > 20 {
-      // FIXME: darkness = 1 - brightness?
-      let darknessLevel = 1 - (Double(viewModel_A.percentage)/100.0 > 1 ? 1 : Double(viewModel_A.percentage)/100.0)
-      UIScreen.main.brightness = darknessLevel
-    }
-  }
-
-  // task 2 - Matching B timer with Volume, system volume percentage = Timer B in seconds / 90s. eg. Timer B runs from 0s to 45s, system volume percentage is from 0% to 50%.
-  private func updateSystemVolumeLevel() {
-    var volume = (Float(viewModel_B.percentage)/100.0) * Float(50)/Float(45)
-    volume = volume > 1 ? 1 : volume
-    MPVolumeView.setVolume(volume)
   }
 }
 
