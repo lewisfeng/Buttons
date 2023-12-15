@@ -31,8 +31,8 @@ struct TimerTextView: View {
 }
 
 class TimerViewModel: ObservableObject {
-  @Published private(set) var date: Date? // start date
-  @Published private(set) var runningTime: TimeInterval = 0 // the total running time before pause
+  @Published var date: Date? // start date
+  @Published var runningTime: TimeInterval = 0 // the total running time before pause
   // - Timer A has a duration 60s from 0% to 100%
   // - Timer B has a duration 90s from 0% to 100%
   // - Timer C has a duration 120s from 0% to 100%

@@ -17,6 +17,7 @@
 		AC4F78FA2B26DFF500A81B44 /* ButtonsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4F78F92B26DFF500A81B44 /* ButtonsTests.swift */; };
 		AC4F79042B26DFF500A81B44 /* ButtonsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4F79032B26DFF500A81B44 /* ButtonsUITests.swift */; };
 		AC4F79062B26DFF500A81B44 /* ButtonsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4F79052B26DFF500A81B44 /* ButtonsUITestsLaunchTests.swift */; };
+		ACBE87D42B2C192500AF4B0B /* TimerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBE87D32B2C192500AF4B0B /* TimerViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		AC4F78FF2B26DFF500A81B44 /* ButtonsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ButtonsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC4F79032B26DFF500A81B44 /* ButtonsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsUITests.swift; sourceTree = "<group>"; };
 		AC4F79052B26DFF500A81B44 /* ButtonsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		ACBE87D32B2C192500AF4B0B /* TimerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				AC4F78F92B26DFF500A81B44 /* ButtonsTests.swift */,
+				ACBE87D32B2C192500AF4B0B /* TimerViewModelTests.swift */,
 			);
 			path = ButtonsTests;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACBE87D42B2C192500AF4B0B /* TimerViewModelTests.swift in Sources */,
 				AC4F78FA2B26DFF500A81B44 /* ButtonsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -491,7 +495,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2TA8JYDP57;
+				DEVELOPMENT_TEAM = 9VM2C437X5;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
@@ -511,7 +515,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2TA8JYDP57;
+				DEVELOPMENT_TEAM = 9VM2C437X5;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
@@ -530,7 +534,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2TA8JYDP57;
+				DEVELOPMENT_TEAM = 9VM2C437X5;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = come.lewisfeng.ButtonsUITests;
@@ -548,7 +552,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2TA8JYDP57;
+				DEVELOPMENT_TEAM = 9VM2C437X5;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = come.lewisfeng.ButtonsUITests;

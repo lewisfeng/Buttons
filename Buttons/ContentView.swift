@@ -74,7 +74,7 @@ struct ContentView: View {
   }
   
   // task 2 - When A timer greater than 20%, start matching the screen darkness level to timer A
-  private func updateScreenDarknessLevel() {
+  func updateScreenDarknessLevel(_ viewModel_A: TimerViewModel) {
     if viewModel_A.percentage > 20 {
       // FIXME: darkness = 1 - brightness?
       let darknessLevel = 1 - (Double(viewModel_A.percentage)/100.0 > 1 ? 1 : Double(viewModel_A.percentage)/100.0)
