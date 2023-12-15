@@ -48,7 +48,7 @@ class TimerViewModel: ObservableObject {
     if date == nil {
       date = Date()
     } else {
-      runningTime = Date().timeIntervalSince(date!)
+      runningTime += Date().timeIntervalSince(date!)
       date = nil
     }
   }
@@ -57,7 +57,7 @@ class TimerViewModel: ObservableObject {
     guard let d = date else { return }
     guard percentage < 100 else { return }
     
-    // get the total running timer for the timer
+    // get the total running time for the timer
     let totalRunningTime = Int(Date().timeIntervalSince(d) + runningTime)
     // check the current percentage, if it's greater than or equal to 100 then just show 100
     percentage = (totalRunningTime*100/duration) >= 100 ? 100 : (totalRunningTime*100/duration)

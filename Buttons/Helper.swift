@@ -11,15 +11,17 @@ class Helper {
   
   // task 2 - When A timer greater than 20%, start matching the screen darkness level to timer A
   static func updateScreenDarknessLevel(_ percentage: Int) {
-    if percentage > 20 {
-      // FIXME: darkness = 1 - brightness?
-      let darknessLevel = 1 - (Double(percentage)/100.0 > 1 ? 1 : Double(percentage)/100.0)
-      UIScreen.main.brightness = darknessLevel
-    }
+    guard percentage > 20 else { return }
+    
+    // FIXME: darkness = 1 - brightness?
+    let darknessLevel = 1 - (Double(percentage)/100.0 > 1 ? 1 : Double(percentage)/100.0)
+    UIScreen.main.brightness = darknessLevel
   }
   
   // task 2 - Matching B timer with Volume, system volume percentage = Timer B in seconds / 90s. eg. Timer B runs from 0s to 45s, system volume percentage is from 0% to 50%.
   static func updateSystemVolumeLevel(_ percentage: Int) {
+    guard percentage > 0 else { return }
+    
     var volume = Float(percentage)/100.0
     volume = volume > 1 ? 1 : volume
     MPVolumeView.setVolume(volume)
